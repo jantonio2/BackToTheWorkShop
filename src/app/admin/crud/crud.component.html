@@ -1,0 +1,119 @@
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-7"></div>
+    <div class="col-5">
+      <label for="buscar">Buscar</label>
+      <input (ngModelChange)=buscar() class="form-control" type="text" name="buscar" id="buscar" [(ngModel)]=busqueda>
+        
+    </div>
+  </div>
+  <br>
+  <br>
+    <div class="row">
+        <div class="col-1">
+
+        </div>
+        <div class="col-4">
+            <br>
+             <form [formGroup]="libroForm">
+                <div class="form-group text-center">
+                  <label for="exampleFormControlInput1">Titulo</label>
+                  <input type="text" class="form-control" id="titulo" formControlName="titulo">
+                  <label for="exampleFormControlInput1">Descripcion</label>
+                  <textarea type="text" class="form-control" id="descripcion" formControlName="descripcion"></textarea>
+                  <label for="exampleFormControlInput1">Area</label>
+                  <input type="text" class="form-control" id="area" formControlName="area">
+                  <label for="exampleFormControlInput1">Empleado</label>
+                  <input type="text" class="form-control" id="empleado" formControlName="empleado">
+                  <label for="exampleFormControlInput1">Observacion</label>
+                  <input type="text" class="form-control" id="observacion" formControlName="observacion">
+                  <br>
+                  <button class="btn btn-success" (click)=agregar(bienDialog,errorDialog)>Agregar</button><br><br>
+                  <button class="btn btn-info" (click)=modificar(bienDialog,errorDialog)>Modificar</button>
+                </div>
+              </form>
+        </div>
+        <div class="col-1">
+
+        </div>
+        <div class="col-6" *ngIf="busqueda.length<3">
+            <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">N°</th>
+                    <th scope="col">Titulo</th>
+                    <th scope="col">Area</th>
+                    <th scope="col">Descripcion</th>
+                    <th scope="col">Empleado</th>
+                    <th scope="col">Observacion</th>
+                    <th scope="col">Modificar</th>
+                    <th scope="col">Eliminar</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let libro of libros |async;let i=index">
+                      <th scope="row">{{i+1}}</th>
+                      <td>{{libro.payload.doc.data().titulo}}</td>
+                      <td>{{libro.payload.doc.data().area}}</td>
+                      <td>{{(libro.payload.doc.data().descripcion)| slice:0:10}}...</td>
+                      <td>{{libro.payload.doc.data().empleado}}</td>
+                      <td>{{libro.payload.doc.data().observacion}}</td>
+                      <td><button class="btn btn-primary" (click)=seleccionar(libro.payload.doc)>Seleccionar</button></td>
+                      <td><button class="btn btn-danger" (click)=borrar(bienDialog,errorDialog,libro.payload.doc.id)>Borrar</button></td>
+                    
+                  
+                </tbody>
+              </table>
+        </div>
+        <div class="col-6" *ngIf="busqueda.length>=3">
+          <table class="table">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">N°</th>
+                  <th scope="col">Titulo</th>
+                  <th scope="col">Area</th>
+                  <th scope="col">Descripcion</th>
+                  <th scope="col">Empleado</th>
+                  <th scope="col">Observacion</th>
+                  <th scope="col">Modificar</th>
+                  <th scope="col">Eliminar</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let libro of librosBusq;let i=index">
+                    <th scope="row">{{i+1}}</th>
+                    <td>{{libro.payload.doc.data().titulo}}</td>
+                    <td>{{libro.payload.doc.data().area}}</td>
+                    <td>{{(libro.payload.doc.data().descripcion)| slice:0:10}}...</td>
+                    <td>{{libro.payload.doc.data().empleado}}</td>
+                    <td>{{libro.payload.doc.data().observacion}}</td>
+                    <td><button class="btn btn-primary" (click)=seleccionar(libro.payload.doc)>Seleccionar</button></td>
+                    <td><button class="btn btn-danger" (click)=borrar(bienDialog,errorDialog,libro.payload.doc.id)>Borrar</button></td>
+                  
+                
+              </tbody>
+            </table>
+      </div>
+    </div>
+    <br><br><br>
+    <div class="row text-center">
+            <div class="col 6">
+                <button class="btn btn-secondary" (click)=cerrarSesion()>Cerrar Sesion</button>
+            </div>
+    </div>
+    <br><br>
+</div>
+<ng-template #bienDialog class="bg-primary">
+    <h2 matDialogTitle class="text-center">Exito</h2>
+    <mat-dialog-actions align="end">
+      <button mat-button matDialogClose class="btn btn-dark">Aceptar</button>
+    </mat-dialog-actions>
+  </ng-template>
+  
+  <ng-template #errorDialog class="bg-danger">
+    <h2 matDialogTitle  class="text-center text-white">Error</h2>
+    <mat-dialog-actions align="end">
+      <button mat-button matDialogClose class="btn btn-light">Aceptar</button>
+    </mat-dialog-actions>
+    </ng-template>

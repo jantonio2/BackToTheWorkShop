@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "libreria-196a3": {
+      "hosting": {
+        "libreria": [
+          "libreria-196a3"
+        ]
+      }
+    }
+  }
+}
