@@ -23,6 +23,9 @@ import { environment } from 'src/environments/environment';
 import {ModalModule} from 'ngx-bootstrap/modal'
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HomePageComponent } from './home-page/home-page.component';
+import { GalleryPageComponent } from './gallery-page/gallery-page.component';
+import { AboutUsPageComponent } from './about-us-page/about-us-page.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +34,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     NavAdminComponent,
     LoginComponent,
     CrudComponent,
+    HomePageComponent,
+    GalleryPageComponent,
+    AboutUsPageComponent,
   ],
   imports: [
     BrowserModule,
