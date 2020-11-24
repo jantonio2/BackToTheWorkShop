@@ -16,18 +16,25 @@
         </div>
         <div class="col-4">
             <br>
-             <form [formGroup]="libroForm">
+             <form [formGroup]="proyectoForm">
                 <div class="form-group text-center">
                   <label for="exampleFormControlInput1">Titulo</label>
                   <input type="text" class="form-control" id="titulo" formControlName="titulo">
-                  <label for="exampleFormControlInput1">Descripcion</label>
-                  <textarea type="text" class="form-control" id="descripcion" formControlName="descripcion"></textarea>
+
                   <label for="exampleFormControlInput1">Area</label>
                   <input type="text" class="form-control" id="area" formControlName="area">
-                  <label for="exampleFormControlInput1">Empleado</label>
-                  <input type="text" class="form-control" id="empleado" formControlName="empleado">
-                  <label for="exampleFormControlInput1">Observacion</label>
-                  <input type="text" class="form-control" id="observacion" formControlName="observacion">
+
+                  <label for="exampleFormControlInput1">Lenguaje</label>
+                  <input type="text" class="form-control" id="lenguaje" formControlName="lenguaje">
+
+                  <label for="exampleFormControlInput1">Descripcion</label>
+                  <textarea type="text" class="form-control" id="descripcion" formControlName="descripcion"></textarea>
+                  
+                  <label for="exampleFormControlInput1">Desarrolladores</label>
+                  <input type="text" class="form-control" id="desarrolladores" formControlName="desarrolladores">
+
+                  <label for="exampleFormControlInput1">Contactos</label>
+                  <input type="text" class="form-control" id="contactos" formControlName="contactos">
                   <br>
                   <button class="btn btn-success" (click)=agregar(bienDialog,errorDialog)>Agregar</button><br><br>
                   <button class="btn btn-info" (click)=modificar(bienDialog,errorDialog)>Modificar</button>
@@ -44,23 +51,25 @@
                     <th scope="col">N°</th>
                     <th scope="col">Titulo</th>
                     <th scope="col">Area</th>
+                    <th scope="col">Lenguaje</th>
                     <th scope="col">Descripcion</th>
-                    <th scope="col">Empleado</th>
-                    <th scope="col">Observacion</th>
+                    <th scope="col">Desarrolladores</th>
+                    <th scope="col">Contactos</th>
                     <th scope="col">Modificar</th>
                     <th scope="col">Eliminar</th>
                   </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let libro of libros |async;let i=index">
+                    <tr *ngFor="let proyecto of proyectos |async;let i=index">
                       <th scope="row">{{i+1}}</th>
-                      <td>{{libro.payload.doc.data().titulo}}</td>
-                      <td>{{libro.payload.doc.data().area}}</td>
-                      <td>{{(libro.payload.doc.data().descripcion)| slice:0:10}}...</td>
-                      <td>{{libro.payload.doc.data().empleado}}</td>
-                      <td>{{libro.payload.doc.data().observacion}}</td>
-                      <td><button class="btn btn-primary" (click)=seleccionar(libro.payload.doc)>Seleccionar</button></td>
-                      <td><button class="btn btn-danger" (click)=borrar(bienDialog,errorDialog,libro.payload.doc.id)>Borrar</button></td>
+                      <td>{{proyecto.payload.doc.data().titulo}}</td>
+                      <td>{{proyecto.payload.doc.data().area}}</td>
+                      <td>{{proyecto.payload.doc.data().lenguaje}}</td>
+                      <td>{{(proyecto.payload.doc.data().descripcion)| slice:0:10}}...</td>
+                      <td>{{proyecto.payload.doc.data().desarrolladores}}</td>
+                      <td>{{proyecto.payload.doc.data().contactos}}</td>
+                      <td><button class="btn btn-primary" (click)=seleccionar(proyecto.payload.doc)>Seleccionar</button></td>
+                      <td><button class="btn btn-danger" (click)=borrar(bienDialog,errorDialog,proyecto.payload.doc.id)>Borrar</button></td>
                     
                   
                 </tbody>
@@ -73,23 +82,25 @@
                   <th scope="col">N°</th>
                   <th scope="col">Titulo</th>
                   <th scope="col">Area</th>
+                  <th scope="col">Lenguaje</th>
                   <th scope="col">Descripcion</th>
-                  <th scope="col">Empleado</th>
-                  <th scope="col">Observacion</th>
+                  <th scope="col">Desarrolladores</th>
+                  <th scope="col">Contactos</th>
                   <th scope="col">Modificar</th>
                   <th scope="col">Eliminar</th>
                 </tr>
               </thead>
               <tbody>
-                  <tr *ngFor="let libro of librosBusq;let i=index">
+                  <tr *ngFor="let proyecto of proyectosBusq;let i=index">
                     <th scope="row">{{i+1}}</th>
-                    <td>{{libro.payload.doc.data().titulo}}</td>
-                    <td>{{libro.payload.doc.data().area}}</td>
-                    <td>{{(libro.payload.doc.data().descripcion)| slice:0:10}}...</td>
-                    <td>{{libro.payload.doc.data().empleado}}</td>
-                    <td>{{libro.payload.doc.data().observacion}}</td>
-                    <td><button class="btn btn-primary" (click)=seleccionar(libro.payload.doc)>Seleccionar</button></td>
-                    <td><button class="btn btn-danger" (click)=borrar(bienDialog,errorDialog,libro.payload.doc.id)>Borrar</button></td>
+                    <td>{{proyecto.payload.doc.data().titulo}}</td>
+                    <td>{{proyecto.payload.doc.data().area}}</td>
+                    <td>{{proyecto.payload.doc.data().lenguaje}}</td>
+                    <td>{{(proyecto.payload.doc.data().descripcion)| slice:0:10}}...</td>
+                    <td>{{proyecto.payload.doc.data().desarrolladores}}</td>
+                    <td>{{proyecto.payload.doc.data().contactos}}</td>
+                    <td><button class="btn btn-primary" (click)=seleccionar(proyecto.payload.doc)>Seleccionar</button></td>
+                    <td><button class="btn btn-danger" (click)=borrar(bienDialog,errorDialog,proyecto.payload.doc.id)>Borrar</button></td>
                   
                 
               </tbody>

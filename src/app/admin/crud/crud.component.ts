@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Libro } from 'src/app/models/Log';
+import { Proyecto } from 'src/app/models/Log';
 import { CrudService } from 'src/app/crud.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from 'src/app/auth.service';
@@ -17,24 +17,25 @@ import { async } from '@angular/core/testing';
   styleUrls: ['./crud.component.css']
 })
 export class CrudComponent implements OnInit {
-  librosBusq=[];
+  proyectosBusq=[];
   busqueda:string="";
-  nuevoLibro:Libro=new Libro();
-  libros:any;
-  libroForm:FormGroup;
+  nuevoProyecto:Proyecto=new Proyecto();
+  proyectos:any;
+  proyectoForm:FormGroup;
   constructor(private firestore:AngularFirestore,
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
     private route:Router,
     formBuilder:FormBuilder,private crud:CrudService,private dialog: MatDialog,private auth:AuthService) { 
-    this.libroForm = formBuilder.group({
+    this.proyectoForm = formBuilder.group({
     titulo: '',
+    area: '',
+    lenguaje: '',
     descripcion: '',
-    area:"",
-    empleado:"",
-    observacion:"",
+    desarrolladores: '',
+    contactos: ''
   });
-    this.libros= firestore.collection('Libros').snapshotChanges();}
+    this.proyectos= firestore.collection('Proyecto').snapshotChanges();}
   
   ngOnInit(): void {
     this.afAuth.authState.subscribe(
@@ -59,24 +60,26 @@ export class CrudComponent implements OnInit {
     await this.auth.signOut();
     this.route.navigate(['admin/login'])
   }
-  seleccionar(libro){
-    this.nuevoLibro=new Libro();
-    this.nuevoLibro.id=libro.id;
-    this.libroForm.get('titulo').setValue(libro.data().titulo);
-    this.libroForm.get('descripcion').setValue(libro.data().descripcion);
-    this.libroForm.get('area').setValue(libro.data().area);
-    this.libroForm.get('empleado').setValue(libro.data().empleado);
-    this.libroForm.get('observacion').setValue(libro.data().observacion);
+  seleccionar(proyecto){
+    this.nuevoProyecto=new Proyecto();
+    this.nuevoProyecto.id=proyecto.id;
+    this.proyectoForm.get('titulo').setValue(proyecto.data().titulo);
+    this.proyectoForm.get('area').setValue(proyecto.data().area);
+    this.proyectoForm.get('lenguaje').setValue(proyecto.data().lenguaje);
+    this.proyectoForm.get('descripcion').setValue(proyecto.data().descripcion);
+    this.proyectoForm.get('desarrolladores').setValue(proyecto.data().desarrolladores);
+    this.proyectoForm.get('contactos').setValue(proyecto.data().contactos);
   }
   async modificar(bien,error){
-    if(this.nuevoLibro.id!=null&&this.nuevoLibro.id!==""&&this.nuevoLibro.id!=="undefined"){
-      this.nuevoLibro.area=await this.libroForm.get('area').value;
-      this.nuevoLibro.descripcion=await this.libroForm.get('descripcion').value;
-      this.nuevoLibro.empleado=await this.libroForm.get('empleado').value;
-      this.nuevoLibro.observacion=await this.libroForm.get('observacion').value;
-      this.nuevoLibro.titulo=await this.libroForm.get('titulo').value;
-        this.crud.modificarLibro(this.nuevoLibro)
-        .then((val)=>{
+    if(this.nuevoProyecto.id!=null&&this.nuevoProyecto.id!==""&&this.nuevoProyecto.id!=="undefined"){
+      this.nuevoProyecto.titulo=await this.proyectoForm.get('titulo').value;
+      this.nuevoProyecto.area=await this.proyectoForm.get('area').value;
+      this.nuevoProyecto.lenguaje=await this.proyectoForm.get('lenguaje').value;
+      this.nuevoProyecto.descripcion=await this.proyectoForm.get('descripcion').value;
+      this.nuevoProyecto.desarrolladores=await this.proyectoForm.get('desarrolladores').value;
+      this.nuevoProyecto.contactos=await this.proyectoForm.get('contactos').value;
+        this.crud.modificarProyecto(this.nuevoProyecto)
+        .then((val) =>{
             if(val==true){
               this.dialog.open(bien);
 
@@ -93,15 +96,15 @@ export class CrudComponent implements OnInit {
   }
   async buscar(){
     if(this.busqueda.length>=3){
-      this.librosBusq=[];
-      this.libros.subscribe(data=>{
-        for(let libro of data){
-          var letras=(libro.payload.doc.data().descripcion.split(" "));
+      this.proyectosBusq=[];
+      this.proyectos.subscribe(data=>{
+        for(let proyecto of data){
+          var letras=(proyecto.payload.doc.data().descripcion.split(" "));
           for(let letra of letras){
             if(letra.length>=3&&this.busqueda.length>=3){
               if(letra.slice(0,3).toLowerCase()==this.busqueda.slice(0,3).toLowerCase()){
-                this.librosBusq.push(libro); 
-                break;             
+                this.proyectosBusq.push(proyecto); 
+                break;
               }
             }
           }
@@ -113,12 +116,13 @@ export class CrudComponent implements OnInit {
     
   }
   async agregar(bien,error){
-      this.nuevoLibro.area=await this.libroForm.get('area').value;
-      this.nuevoLibro.descripcion=await this.libroForm.get('descripcion').value;
-      this.nuevoLibro.empleado=await this.libroForm.get('empleado').value;
-      this.nuevoLibro.titulo=await this.libroForm.get('titulo').value;
-      this.nuevoLibro.observacion=await this.libroForm.get('observacion').value;
-        this.crud.addLibro(this.nuevoLibro)
+      this.nuevoProyecto.titulo=await this.proyectoForm.get('titulo').value;
+      this.nuevoProyecto.area=await this.proyectoForm.get('area').value;
+      this.nuevoProyecto.lenguaje=await this.proyectoForm.get('lenguaje').value;
+      this.nuevoProyecto.descripcion=await this.proyectoForm.get('descripcion').value;
+      this.nuevoProyecto.desarrolladores=await this.proyectoForm.get('desarrolladores').value;
+      this.nuevoProyecto.contactos=await this.proyectoForm.get('contactos').value;
+        this.crud.addProyecto(this.nuevoProyecto)
         .then((val)=>{
             if(val==true){
               this.dialog.open(bien);
@@ -134,7 +138,7 @@ export class CrudComponent implements OnInit {
         })
   }
   async borrar(bien,error,id){
-      this.crud.delLibro(id)
+      this.crud.delProyecto(id)
       .then((val)=>{
           if(val==true){
             this.dialog.open(bien);
