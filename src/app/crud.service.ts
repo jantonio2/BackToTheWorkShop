@@ -3,7 +3,6 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Route } from '@angular/compiler/src/core';
 import { Router } from '@angular/router';
 import { Libro } from './models/Log';
-import { Venta } from './models/Venta';
 
 @Injectable({
   providedIn: 'root'
