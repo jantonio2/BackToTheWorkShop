@@ -3,7 +3,7 @@
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false">
-    <mat-toolbar>Menu</mat-toolbar>
+    <mat-toolbar style="background-color: #1c3643; color: aliceblue;">Menu</mat-toolbar>
     <mat-nav-list>
       <a mat-list-item href="homePage">Home Page</a>
       <a mat-list-item href="galleryPage">Gallery Page</a>
