@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Route } from '@angular/compiler/src/core';
 import { Router } from '@angular/router';
-import { Libro } from './models/Log';
+import { Proyecto } from './models/Log';
 
 @Injectable({
   providedIn: 'root'
@@ -12,14 +12,15 @@ export class CrudService {
   constructor(
     private afs: AngularFirestore,
     private router: Router) { }
-  async modificarLibro(libro:Libro):Promise<any>{
+  async modificarProyecto(proyecto:Proyecto):Promise<any>{
       try{
-        await this.afs.collection("Libros").doc(libro.id).update({
-          "area":libro.area,
-          "descripcion":libro.descripcion,
-          "empleado":libro.empleado,
-          "observacion":libro.observacion,
-          "titulo":libro.titulo
+        await this.afs.collection("Proyecto").doc(proyecto.id).update({
+          "titulo":proyecto.titulo,
+          "area":proyecto.area,
+          "lenguaje":proyecto.lenguaje,
+          "descripcion":proyecto.descripcion,
+          "desarrolladores":proyecto.desarrolladores,
+          "contactos":proyecto.contactos
         })
         return true;
       }
@@ -29,14 +30,15 @@ export class CrudService {
 
       }
     }
-    async addLibro(libro:Libro):Promise<any>{
+    async addProyecto(proyecto:Proyecto):Promise<any>{
       try{
-        await this.afs.collection("Libros").add({
-          "area":libro.area,
-          "descripcion":libro.descripcion,
-          "empleado":libro.empleado,
-          "observacion":libro.observacion,
-          "titulo":libro.titulo
+        await this.afs.collection("Proyecto").add({
+          "titulo":proyecto.titulo,
+          "area":proyecto.area,
+          "lenguaje":proyecto.lenguaje,
+          "descripcion":proyecto.descripcion,
+          "desarrolladores":proyecto.desarrolladores,
+          "contactos":proyecto.contactos
         })
         return true;
       }
@@ -46,9 +48,9 @@ export class CrudService {
 
       }
     }
-    async delLibro(id:string):Promise<any>{
+    async delProyecto(id:string):Promise<any>{
       try{
-        await this.afs.collection("Libros").doc(id).delete();
+        await this.afs.collection("Proyecto").doc(id).delete();
         return true;
       }
       catch(e){
