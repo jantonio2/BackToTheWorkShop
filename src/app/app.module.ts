@@ -16,9 +16,12 @@ import { LoginComponent } from './admin/login/login.component';
 import { CrudComponent } from './admin/crud/crud.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
+
 import {AngularFireModule} from'@angular/fire'
 import {AngularFireAuthModule} from'@angular/fire/auth'
 import {AngularFirestoreModule} from'@angular/fire/firestore'
+import {AngularFireStorageModule} from '@angular/fire/storage'
+
 import { environment } from 'src/environments/environment';
 import {ModalModule} from 'ngx-bootstrap/modal'
 import { FormsModule } from '@angular/forms';
@@ -48,8 +51,9 @@ import { AboutUsPageComponent } from './about-us-page/about-us-page.component';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    ModalModule.forRoot(), 
+    ModalModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
+    AngularFireStorageModule,
     AngularFireAuthModule,
     AngularFirestoreModule,
     LayoutModule,

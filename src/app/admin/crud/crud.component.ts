@@ -100,7 +100,7 @@ export class CrudComponent implements OnInit {
       this.proyectos.subscribe(data=>{
         for(let proyecto of data){
           var letras=(proyecto.payload.doc.data().area.split(" "));
-          for(let letra of letras){
+          for(let letra of letras){ 
             if(letra.length>=3&&this.busqueda.length>=3){
               if(letra.slice(0,3).toLowerCase()==this.busqueda.slice(0,3).toLowerCase()){
                 this.proyectosBusq.push(proyecto); 
