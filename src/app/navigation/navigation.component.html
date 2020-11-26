@@ -1,31 +1,29 @@
-<mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport
-      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-      [mode]="(isHandset$ | async) ? 'over' : 'side'"
-      [opened]="(isHandset$ | async) === false">
-    <mat-toolbar style="background-color: #1c3643; color: aliceblue;">Menu</mat-toolbar>
-    <mat-nav-list>
-      <a mat-list-item href="homePage">Home Page</a>
-      <a mat-list-item href="galleryPage">Gallery Page</a>
-      <a mat-list-item href="aboutUsPage">About Us</a>
-      <a *ngIf="tipo&&!logueado"  mat-list-item href="admin/login">Login</a>
-      <a *ngIf="tipo&&logueado"  mat-list-item href="admin/crud">Administrar</a>
-      <a *ngIf="!tipo" mat-list-item href="user/venta">Venta</a>
-    </mat-nav-list>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <mat-toolbar style="background-color: #6c757d; color: aliceblue;">
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async">
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button>
-      <span>Back to the Workshop</span>
-    </mat-toolbar>
-    
-    <router-outlet></router-outlet>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+<div class="header">
+  <div class="logo">
+    Back to the Workshop
+  </div>
+  <div class="menu">
+    <a href="home-page" class="link">
+      <div class="title">Home</div>
+      <div class="bar"></div>
+    </a>
+    <a href="galleryPage" class="link">
+      <div class="title">Proyectos</div>
+      <div class="bar"></div>
+    </a>
+    <a href="aboutUsPage" class="link">
+      <div class="title">Contacto</div>
+      <div class="bar"></div>
+    </a>
+    <a *ngIf="tipo&&logueado" href="admin/login" class="link">
+      <div class="title">Login</div>
+      <div class="bar"></div>
+    </a>
+    <a *ngIf="tipo&&!logueado" href="admin/login" class="link">
+      <div class="title">Administrar</div>
+      <div class="bar"></div>
+    </a>
+  </div>
+</div>
+
+<router-outlet></router-outlet>

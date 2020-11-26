@@ -1,60 +1,24 @@
-<section class="mt-4">
-    <div class="container">
-      <div class="row">
-        <div class="col text-center text-uppercase">
-          <h2>¡¡¡Here are the projects!!!</h2>
-        </div>
-        <div>
-          <form class="form-inline my-2 my-lg-0" [formGroup]="registerForm">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-        </div>
-        <div>
-          <a type="button" class="btn btn-primary" href="admin/login">Iniciar Sesión</a>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-12 col-md-6 col-lg-4 mb-4">
-          <div class="card">
-            <img class="card-img-top" src="assets/web1.jpg" style="height: 300px;" alt="Producto">
-            <div class="card-body">
-              <div class="badges">
-                <span class="badge badge-info">Sistemas Inteligentes</span>
-                <span class="badge badge-info">Python</span>
-              </div>
-              <h5 class="card-title text-center"><strong>Sistema Automata</strong></h5>
-              <p class="card-text text-justify">Contamos con una amplia variedad de productos de todos los tipos, puedes encontrar promociones y hasta productos que no encontrarás en otro lugar.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-12 col-md-6 col-lg-4 mb-4">
-          <div class="card">
-            <img class="card-img-top" src="assets/web2.jpg" style="height: 300px;" alt="Delivery">
-            <div class="card-body">
-              <div class="badges">
-                <span class="badge badge-info">Internet de las cosas</span>
-                <span class="badge badge-info">Arduino</span>
-              </div>
-              <h5 class="card-title text-center"><strong>Diadema de control mental</strong></h5>
-              <p class="card-text text-justify">Nuestros deliveries son los mas rápidos y puntuales, contamos con un protocolo extricto de entrega de productos. Pidelo gratis si tardamos.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-12 col-md-6 col-lg-4 mb-4">
-          <div class="card">
-            <img class="card-img-top" src="assets/web3.jpg" style="height: 300px;" alt="Asistencia">
-            <div class="card-body">
-              <div class="badges">
-                <span class="badge badge-info">Tecnologías Web</span>
-                <span class="badge badge-info">Javascript</span>
-              </div>
-              <h5 class="card-title text-center"><strong>Sistema historial de proyectos WorkShops</strong></h5>
-              <p class="card-text text-justify">¿Necesitas ayuda? Puedes contactarnos a través de la pestaña de <a href="aboutUsPage">contactos</a>. Te brindaremos la tención que necesitas de forma rápida y confiable. </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  
+<div class="content">
+<div fxLayout="row wrap" fxLayoutGap="65px grid">
+  <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let proyecto of proyectos | async">
+<mat-card class="card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>UCB La Paz</mat-card-title>
+      <mat-card-subtitle> <td>{{proyecto.payload.doc.data().titulo}}</td></mat-card-subtitle>
+    </mat-card-header>
+    <iframe src="https://www.youtube.com/embed/eV-N9fDQbcE" width="100%" frameborder="0" webkitallowfullscreen mozallowfullscreen
+      allowfullscreen></iframe>
+    <mat-card-content>
+      <p>
+        <td>{{(proyecto.payload.doc.data().descripcion)| slice:0:100}}...</td>
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button>LIKE</button>
+      <button mat-button>SHARE</button>
+    </mat-card-actions>
+  </mat-card>
+  </div>
+</div>
+</div>

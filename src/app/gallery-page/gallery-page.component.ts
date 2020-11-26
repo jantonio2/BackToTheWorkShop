@@ -1,20 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
-  selector: 'app-gallery-page',
+  selector: 'app-videos',
   templateUrl: './gallery-page.component.html',
   styleUrls: ['./gallery-page.component.css']
 })
 export class GalleryPageComponent implements OnInit {
-
-  registerForm = new FormGroup({
-    variable: new FormControl('')
-  });
-
-  constructor() { }
-
+  proyectos:any;
+  constructor(private firestore:AngularFirestore) { }
   ngOnInit(): void {
+    this.proyectos= this.firestore.collection('Proyecto').snapshotChanges();
   }
-
 }
