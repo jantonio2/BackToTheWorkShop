@@ -1,5 +1,4 @@
 p.card { 
-    max-height: 150px;
   background-color: rgb(241, 241, 241);
   border: 55px solid #000;
   border-radius: 55px !important;
@@ -11,9 +10,22 @@ p.card {
   background-size: cover;
 }
 .content {
-    padding: 5%;
+    padding: 3%;
     /*background-color: rgb(47, 47, 109);*/
 }
 .content > mat-card {
     width: 200px;
+}
+p {
+  font-size: 20px;
+}
+h3{
+  font-size: 20px;
+  font-weight: bold;
+}
+iframe {
+  margin: auto;
+  display:block;
+    width: 920px;
+    height: 520px;
 }

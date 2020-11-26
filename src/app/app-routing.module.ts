@@ -23,6 +23,10 @@ const routes: Routes = [
       }
     ]
   },
+    {
+    path:'project/:proId',
+    component: ProjectPageComponent
+  },
   {
     path:'homePage',
     component:HomePageComponent
@@ -38,10 +42,6 @@ const routes: Routes = [
   {
     path:'**',
     component:HomePageComponent
-  },
-  {
-    path:'project',
-    component: ProjectPageComponent
   }
 ];
 

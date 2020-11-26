@@ -1,22 +1,24 @@
 <div class="content">
-<div fxLayout="row wrap" fxLayoutGap="65px grid">
-  <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let proyecto of proyectos | async">
+<div fxLayout="row wrap" fxLayoutGap="45px grid">
+  <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let proyecto of proyectos | async; index as id">
 <mat-card class="card">
     <mat-card-header>
       <div mat-card-avatar class="example-header-image"></div>
       <mat-card-title>UCB La Paz</mat-card-title>
       <mat-card-subtitle> <td>{{proyecto.payload.doc.data().titulo}}</td></mat-card-subtitle>
     </mat-card-header>
-    <iframe src="https://www.youtube.com/embed/eV-N9fDQbcE" width="100%" frameborder="0" webkitallowfullscreen mozallowfullscreen
+      <iframe [src]="getSantizeUrl(proyecto.payload.doc.data().videoProy)" width="100%" frameborder="0" webkitallowfullscreen mozallowfullscreen
       allowfullscreen></iframe>
-    <mat-card-content>
-      <p>
-        <td>{{(proyecto.payload.doc.data().descripcion)| slice:0:100}}...</td>
+      <mat-card-content>
+        <p>
+        <td>Descripción:   {{(proyecto.payload.doc.data().descripcion)}}</td>
+      </p>
+        <p>
+        <td>Area:   {{(proyecto.payload.doc.data().area)}}</td>
       </p>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-button>LIKE</button>
-      <button mat-button>SHARE</button>
+      <button mat-button [routerLink]="['/project',id]" class="boton">Ver proyecto</button>
     </mat-card-actions>
   </mat-card>
   </div>

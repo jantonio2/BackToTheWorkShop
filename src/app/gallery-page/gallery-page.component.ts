@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-
+import { DomSanitizer } from "@angular/platform-browser";
 @Component({
   selector: 'app-videos',
   templateUrl: './gallery-page.component.html',
@@ -8,8 +8,12 @@ import { AngularFirestore } from '@angular/fire/firestore';
 })
 export class GalleryPageComponent implements OnInit {
   proyectos:any;
-  constructor(private firestore:AngularFirestore) { }
+  url: string;
+  constructor(private firestore:AngularFirestore, private sanitizer: DomSanitizer) { }
   ngOnInit(): void {
     this.proyectos= this.firestore.collection('Proyecto').snapshotChanges();
+  }
+  public getSantizeUrl(url : string) {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 }
