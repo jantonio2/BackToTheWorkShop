@@ -1,0 +1,19 @@
+.card {
+  max-width: 500px;
+  background-color: rgb(241, 241, 241);
+  border: 55px solid #000;
+  border-radius: 55px !important;
+  border: #000 !important;
+  /*background-image: url(/src/assets/background.png);*/
+}
+.example-header-image {
+  background-image: url('https://tja.ucb.edu.bo/wp-content/uploads/2020/09/cropped-logo-UCB.png');
+  background-size: cover;
+}
+.content {
+    padding: 5%;
+    /*background-color: rgb(47, 47, 109);*/
+}
+.content > mat-card {
+    width: 200px;
+}
