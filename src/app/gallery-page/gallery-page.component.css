@@ -1,8 +1,7 @@
 .card {
   max-width: 500px;
   max-height: 450px;
-  min-width: 400px;
-  min-height: 400px;
+  min-height: 450px;
   background-color: rgb(241, 241, 241);
   border: 55px solid #000;
   border-radius: 55px !important;
@@ -14,7 +13,7 @@
   background-size: cover;
 }
 .content {
-    padding: 5%;
+    padding: 3%;
     /*background-color: rgb(47, 47, 109);*/
 }
 .content > mat-card {
