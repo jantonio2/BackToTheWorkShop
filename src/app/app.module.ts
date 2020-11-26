@@ -32,6 +32,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { GalleryPageComponent } from './gallery-page/gallery-page.component';
 import { AboutUsPageComponent } from './about-us-page/about-us-page.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ProjectPageComponent } from './project-page/project-page.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     HomePageComponent,
     GalleryPageComponent,
     AboutUsPageComponent,
+    ProjectPageComponent,
   ],
   imports: [
     BrowserModule,

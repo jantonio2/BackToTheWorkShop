@@ -5,6 +5,7 @@ import { CrudComponent } from './admin/crud/crud.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { GalleryPageComponent } from './gallery-page/gallery-page.component';
 import { AboutUsPageComponent } from './about-us-page/about-us-page.component';
+import { ProjectPageComponent } from './project-page/project-page.component';
 
 
 
@@ -37,6 +38,10 @@ const routes: Routes = [
   {
     path:'**',
     component:HomePageComponent
+  },
+  {
+    path:'project',
+    component: ProjectPageComponent
   }
 ];
 
