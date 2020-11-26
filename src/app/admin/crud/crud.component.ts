@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -10,6 +10,9 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Route } from '@angular/compiler/src/core';
 import { Router } from '@angular/router';
 import { async } from '@angular/core/testing';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-crud',
@@ -24,6 +27,12 @@ export class CrudComponent implements OnInit {
   proyectoForm:FormGroup;
   private image:any;
   private video:any;
+  
+  dataSource = new MatTableDataSource();
+
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+
   constructor(private firestore:AngularFirestore,
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
@@ -42,6 +51,7 @@ export class CrudComponent implements OnInit {
     this.proyectos= firestore.collection('Proyecto').snapshotChanges();}
   
   ngOnInit(): void {
+    this.crud.getAllProys().subscribe(proys => (this.dataSource.data = proys));
     this.afAuth.authState.subscribe(
       {
         next:(next)=>{
@@ -60,6 +70,15 @@ export class CrudComponent implements OnInit {
       }
     )
   }
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
   async cerrarSesion(){
     await this.auth.signOut();
     this.route.navigate(['admin/login'])
@@ -76,39 +95,16 @@ export class CrudComponent implements OnInit {
     this.proyectoForm.get('imageRef').setValue(proyecto.data().image);
     this.proyectoForm.get('videoRef').setValue(proyecto.data().video);
   }
-  /*async modificar(bien,error){
-    if(this.nuevoProyecto.id!=null&&this.nuevoProyecto.id!==""&&this.nuevoProyecto.id!=="undefined"){
-      this.nuevoProyecto.titulo=await this.proyectoForm.get('titulo').value;
-      this.nuevoProyecto.area=await this.proyectoForm.get('area').value;
-      this.nuevoProyecto.lenguaje=await this.proyectoForm.get('lenguaje').value;
-      this.nuevoProyecto.descripcion=await this.proyectoForm.get('descripcion').value;
-      this.nuevoProyecto.desarrolladores=await this.proyectoForm.get('desarrolladores').value;
-      this.nuevoProyecto.contactos=await this.proyectoForm.get('contactos').value;
-        this.crud.modificarProyecto(this.nuevoProyecto)
-        .then((val) =>{
-            if(val==true){
-              this.dialog.open(bien);
-
-            }else{
-              this.dialog.open(error);
-              
-            }
-        })        
-        .catch(()=>{
-          this.dialog.open(error);
-
-        })
-    }
-  }*/
+  
   async buscar(){
-    if(this.busqueda.length>=3){
+    if(this.busqueda.length>=2){
       this.proyectosBusq=[];
       this.proyectos.subscribe(data=>{
         for(let proyecto of data){
           var letras=(proyecto.payload.doc.data().area.split(" "));
           for(let letra of letras){ 
-            if(letra.length>=3&&this.busqueda.length>=3){
-              if(letra.slice(0,3).toLowerCase()==this.busqueda.slice(0,3).toLowerCase()){
+            if(letra.length>=2&&this.busqueda.length>=2){
+              if(letra.slice(0,2).toLowerCase()==this.busqueda.slice(0,2).toLowerCase()){
                 this.proyectosBusq.push(proyecto); 
                 break;
               }
@@ -131,19 +127,15 @@ export class CrudComponent implements OnInit {
       
         console.log('New post',this.nuevoProyecto);
         this.crud.preAddAndUpdateProy(this.nuevoProyecto, this.image, this.video);
-        /*.then((val)=>{
-            if(val==true){
-              this.dialog.open(bien);
-
-            }else{
-              this.dialog.open(error);
-              
-            }
-        })        
-        .catch(()=>{
-          this.dialog.open(error);
-
-        })*/
+        this.dialog.open(bien);
+        this.proyectoForm.get('titulo').setValue(" ");
+        this.proyectoForm.get('area').setValue(" ");
+        this.proyectoForm.get('lenguaje').setValue(" ");
+        this.proyectoForm.get('descripcion').setValue(" ");
+        this.proyectoForm.get('desarrolladores').setValue(" ");
+        this.proyectoForm.get('contactos').setValue(" ");
+        this.proyectoForm.get('imageRef').setValue(" ");
+        this.proyectoForm.get('videoRef').setValue(" ");
   }
   async borrar(bien,error,id){
       this.crud.delProyecto(id)

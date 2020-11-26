@@ -5,7 +5,7 @@
     <div class="col-5">
       <label for="buscar">Buscar</label>
       <input (ngModelChange)=buscar() class="form-control" type="text" name="buscar" id="buscar" [(ngModel)]=busqueda>
-        
+      <!--<input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter" />    -->
     </div>
   </div>
   <br>
@@ -61,7 +61,7 @@
         <div class="col-1">
 
         </div>
-        <div class="col-6" *ngIf="busqueda.length<3">
+        <div class="col-6" *ngIf="busqueda.length<2">
             <table class="table">
                 <thead class="thead-dark">
                   <tr>
@@ -92,7 +92,7 @@
                 </tbody>
               </table>
         </div>
-        <div class="col-6" *ngIf="busqueda.length>=3">
+        <div class="col-6" *ngIf="busqueda.length>=2">
           <table class="table">
               <thead class="thead-dark">
                 <tr>
@@ -118,11 +118,9 @@
                     <td>{{proyecto.payload.doc.data().contactos}}</td>
                     <td><button class="btn btn-primary" (click)=seleccionar(proyecto.payload.doc)>Seleccionar</button></td>
                     <td><button class="btn btn-danger" (click)=borrar(bienDialog,errorDialog,proyecto.payload.doc.id)>Borrar</button></td>
-                  
-                
               </tbody>
             </table>
-      </div>
+          </div>
     </div>
     <br><br><br>
     <div class="row text-center">

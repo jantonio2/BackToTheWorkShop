@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Route } from '@angular/compiler/src/core';
 import { Router } from '@angular/router';
@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 import { Image, Video } from './models/media';
 
 import { AngularFireStorage } from '@angular/fire/storage';
-import { finalize } from 'rxjs/operators';
+import { finalize, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -19,10 +19,25 @@ export class CrudService {
   private videoPath: any;
   private downloadVideoURL: Observable<string>;
 
+
   constructor(
     private afs: AngularFirestore,
     private storage: AngularFireStorage,
     private router: Router) { }
+
+    public getAllProys(): Observable<Proyecto[]> {
+      return this.afs.collection("Proyecto")
+        .snapshotChanges()
+        .pipe(
+          map(actions =>
+            actions.map(a => {
+              const data = a.payload.doc.data() as Proyecto;
+              const id = a.payload.doc.id;
+              return { id, ...data };
+            })
+          )
+        );
+    }
   /*async modificarProyecto(proyecto:Proyecto):Promise<any>{
       try{
         await this.afs.collection("Proyecto").doc(proyecto.id).update({
