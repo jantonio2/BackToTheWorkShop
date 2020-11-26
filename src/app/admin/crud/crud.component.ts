@@ -22,6 +22,8 @@ export class CrudComponent implements OnInit {
   nuevoProyecto:Proyecto=new Proyecto();
   proyectos:any;
   proyectoForm:FormGroup;
+  private image:any;
+  private video:any;
   constructor(private firestore:AngularFirestore,
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
@@ -33,7 +35,9 @@ export class CrudComponent implements OnInit {
     lenguaje: '',
     descripcion: '',
     desarrolladores: '',
-    contactos: ''
+    contactos: '',
+    imageProy: '',
+    videoProy: '',
   });
     this.proyectos= firestore.collection('Proyecto').snapshotChanges();}
   
@@ -69,8 +73,10 @@ export class CrudComponent implements OnInit {
     this.proyectoForm.get('descripcion').setValue(proyecto.data().descripcion);
     this.proyectoForm.get('desarrolladores').setValue(proyecto.data().desarrolladores);
     this.proyectoForm.get('contactos').setValue(proyecto.data().contactos);
+    this.proyectoForm.get('imageRef').setValue(proyecto.data().image);
+    this.proyectoForm.get('videoRef').setValue(proyecto.data().video);
   }
-  async modificar(bien,error){
+  /*async modificar(bien,error){
     if(this.nuevoProyecto.id!=null&&this.nuevoProyecto.id!==""&&this.nuevoProyecto.id!=="undefined"){
       this.nuevoProyecto.titulo=await this.proyectoForm.get('titulo').value;
       this.nuevoProyecto.area=await this.proyectoForm.get('area').value;
@@ -93,7 +99,7 @@ export class CrudComponent implements OnInit {
 
         })
     }
-  }
+  }*/
   async buscar(){
     if(this.busqueda.length>=3){
       this.proyectosBusq=[];
@@ -122,8 +128,10 @@ export class CrudComponent implements OnInit {
       this.nuevoProyecto.descripcion=await this.proyectoForm.get('descripcion').value;
       this.nuevoProyecto.desarrolladores=await this.proyectoForm.get('desarrolladores').value;
       this.nuevoProyecto.contactos=await this.proyectoForm.get('contactos').value;
-        this.crud.addProyecto(this.nuevoProyecto)
-        .then((val)=>{
+      
+        console.log('New post',this.nuevoProyecto);
+        this.crud.preAddAndUpdateProy(this.nuevoProyecto, this.image, this.video);
+        /*.then((val)=>{
             if(val==true){
               this.dialog.open(bien);
 
@@ -135,7 +143,7 @@ export class CrudComponent implements OnInit {
         .catch(()=>{
           this.dialog.open(error);
 
-        })
+        })*/
   }
   async borrar(bien,error,id){
       this.crud.delProyecto(id)
@@ -152,6 +160,14 @@ export class CrudComponent implements OnInit {
         this.dialog.open(error);
 
       })
-}
+  }
+
+  handleImage(event: any): void {
+    this.image = event.target.files[0];
+  }
+
+  handleVideo(event: any): void {
+    this.video = event.target.files[0];
+  }
 
 }

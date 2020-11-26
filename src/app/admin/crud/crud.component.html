@@ -36,8 +36,25 @@
                   <label for="exampleFormControlInput1">Contactos</label>
                   <input type="text" class="form-control" id="contactos" formControlName="contactos">
                   <br>
-                  <button class="btn btn-success" (click)=agregar(bienDialog,errorDialog)>Agregar</button><br><br>
-                  <button class="btn btn-info" (click)=modificar(bienDialog,errorDialog)>Modificar</button>
+
+                  <div class="input-group">
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" formControlName="imageProy" (change)="handleImage($event)">
+                      <label class="custom-file-label" for="inputGroupFile04"><mat-icon>cloud_upload</mat-icon> Subir imagen</label>
+                    </div>
+                  </div>
+                  <br>  
+                  
+                  <div class="input-group">
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" formControlName="videoProy" (change)="handleVideo($event)">
+                      <label class="custom-file-label" for="inputGroupFile04"><mat-icon>cloud_upload</mat-icon> Subir video</label>
+                    </div>
+                  </div>
+
+                  <br>
+                  <button class="btn btn-success" (click)=agregar(bienDialog,errorDialog)>Guardar</button><br><br>
+                  <!--<button class="btn btn-info" (click)=modificar(bienDialog,errorDialog)>Modificar</button>-->
                 </div>
               </form>
         </div>
