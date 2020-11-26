@@ -29,6 +29,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HomePageComponent } from './home-page/home-page.component';
 import { GalleryPageComponent } from './gallery-page/gallery-page.component';
 import { AboutUsPageComponent } from './about-us-page/about-us-page.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { AboutUsPageComponent } from './about-us-page/about-us-page.component';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-  MatCardModule
+  MatCardModule,
+  FlexLayoutModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
