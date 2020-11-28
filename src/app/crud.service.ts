@@ -67,11 +67,15 @@ export class CrudService {
           "descripcion":proyecto.descripcion,
           "desarrolladores":proyecto.desarrolladores,
           "contactos":proyecto.contactos,
+          "semestres":proyecto.semestre,
+          "anio":proyecto.anio,
           "imageRef":this.imagePath,
           "imageProy":this.downloadImageURL,
           "videoRef":this.videoPath,
           "videoProy":this.downloadVideoURL,
+          "tripticoRef":this.tripPath,
           "tripticoProy":this.downloadTripURL,
+          
         };
         if(proyecto.id){
           this.afs.collection("Proyecto").doc(proyecto.id).update(proyObj);
