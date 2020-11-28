@@ -7,7 +7,7 @@ export class Proyecto{
     desarrolladores:string;
     contactos:string;
     semestre:string;
-    año:string;
+    anio:string;
     imageProy:any;
     imageRef:string;
     videoProy:any;
