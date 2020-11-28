@@ -27,6 +27,7 @@ export class CrudComponent implements OnInit {
   proyectoForm:FormGroup;
   private image:any;
   private video:any;
+  private triptico:any;
   
   dataSource = new MatTableDataSource();
 
@@ -45,8 +46,11 @@ export class CrudComponent implements OnInit {
     descripcion: '',
     desarrolladores: '',
     contactos: '',
+    semestre: '',
+    año: '',
     imageProy: '',
     videoProy: '',
+    tripticoProy: '',
   });
     this.proyectos= firestore.collection('Proyecto').snapshotChanges();}
   
@@ -92,8 +96,11 @@ export class CrudComponent implements OnInit {
     this.proyectoForm.get('descripcion').setValue(proyecto.data().descripcion);
     this.proyectoForm.get('desarrolladores').setValue(proyecto.data().desarrolladores);
     this.proyectoForm.get('contactos').setValue(proyecto.data().contactos);
+    this.proyectoForm.get('semestre').setValue(proyecto.data().semestre);
+    this.proyectoForm.get('año').setValue(proyecto.data().año);
     this.proyectoForm.get('imageRef').setValue(proyecto.data().image);
     this.proyectoForm.get('videoRef').setValue(proyecto.data().video);
+    this.proyectoForm.get('tripticoRef').setValue(proyecto.data().triptico);
   }
   
   async buscar(){
@@ -126,7 +133,7 @@ export class CrudComponent implements OnInit {
       this.nuevoProyecto.contactos=await this.proyectoForm.get('contactos').value;
       
         console.log('New post',this.nuevoProyecto);
-        this.crud.preAddAndUpdateProy(this.nuevoProyecto, this.image, this.video);
+        this.crud.preAddAndUpdateProy(this.nuevoProyecto, this.image, this.video, this.triptico);
         this.dialog.open(bien);
         this.proyectoForm.get('titulo').setValue(" ");
         this.proyectoForm.get('area').setValue(" ");
@@ -134,8 +141,11 @@ export class CrudComponent implements OnInit {
         this.proyectoForm.get('descripcion').setValue(" ");
         this.proyectoForm.get('desarrolladores').setValue(" ");
         this.proyectoForm.get('contactos').setValue(" ");
+        this.proyectoForm.get('semestre').setValue(" ");
+        this.proyectoForm.get('año').setValue(" ");
         this.proyectoForm.get('imageRef').setValue(" ");
         this.proyectoForm.get('videoRef').setValue(" ");
+        this.proyectoForm.get('tripticoRef').setValue(" ");
   }
   async borrar(bien,error,id){
       this.crud.delProyecto(id)
@@ -160,6 +170,10 @@ export class CrudComponent implements OnInit {
 
   handleVideo(event: any): void {
     this.video = event.target.files[0];
+  }
+
+  handleTriptico(event: any): void {
+    this.triptico = event.target.files[0];
   }
 
 }

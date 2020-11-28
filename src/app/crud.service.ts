@@ -4,7 +4,7 @@ import { Route } from '@angular/compiler/src/core';
 import { Router } from '@angular/router';
 import { Proyecto } from './models/Log';
 import { Observable } from 'rxjs';
-import { Image, Video } from './models/media';
+import { Image, Triptico, Video } from './models/media';
 
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize, map } from 'rxjs/operators';
@@ -18,6 +18,8 @@ export class CrudService {
   private downloadImageURL: Observable<string>;
   private videoPath: any;
   private downloadVideoURL: Observable<string>;
+  private tripPath: any;
+  private downloadTripURL: Observable<string>;
 
 
   constructor(
@@ -69,6 +71,7 @@ export class CrudService {
           "imageProy":this.downloadImageURL,
           "videoRef":this.videoPath,
           "videoProy":this.downloadVideoURL,
+          "tripticoProy":this.downloadTripURL,
         };
         if(proyecto.id){
           this.afs.collection("Proyecto").doc(proyecto.id).update(proyObj);
@@ -83,19 +86,22 @@ export class CrudService {
       }
     }
 
-    public preAddAndUpdateProy(proy: Proyecto, image: Image, video: Video): void {
+    public preAddAndUpdateProy(proy: Proyecto, image: Image, video: Video, trip: Triptico): void {
       console.log('Entra preAdd');
-      this.uploadImageVideo(proy, image, video);
+      this.uploadImageVideo(proy, image, video, trip);
     }
 
-    private uploadImageVideo(proy: Proyecto, image: Image, video: Video) {
+    private uploadImageVideo(proy: Proyecto, image: Image, video: Video, trip: Triptico) {
       console.log('Entra upload');
       this.imagePath = `images/${image.name}`;
       this.videoPath = `videos/${video.name}`;
+      this.tripPath =  `tripticos/${trip.name}`;
       const fileRef = this.storage.ref(this.imagePath);
       const task = this.storage.upload(this.imagePath, image);
       const fileRef2 = this.storage.ref(this.videoPath);
       const task2 = this.storage.upload(this.videoPath, video);
+      const fileRef3 = this.storage.ref(this.tripPath);
+      const task3 = this.storage.upload(this.tripPath, trip);
       task.snapshotChanges()
         .pipe(
           finalize(() => {
@@ -114,6 +120,15 @@ export class CrudService {
             });
           })
         ).subscribe();
+        task3.snapshotChanges()
+        .pipe(
+          finalize(() => {
+            fileRef3.getDownloadURL().subscribe(urlTriptico => {
+              this.downloadTripURL = urlTriptico;
+              this.addProyecto(proy);
+            });
+          })
+        ).subscribe();  
      
     }
 
