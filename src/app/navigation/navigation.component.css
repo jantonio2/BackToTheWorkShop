@@ -10,7 +10,7 @@ html, body {
   border-bottom: 1px solid black;
   text-align: right;
   position: relative;
-
+  
 }
 .logo {
     position: absolute;
@@ -33,6 +33,9 @@ html, body {
   font-size: 20px;
 
 }
+.izquierda {
+  height: 60px;
+}
 .bar {
     width: 100%;
     display: inline-block;
@@ -40,7 +43,7 @@ html, body {
     position: absolute;
     bottom: 0;
     left: 0;
-    opacity: 0;
+    opacity: 20%;
     transition: all 300ms;
   }
   /* div.noticia {
