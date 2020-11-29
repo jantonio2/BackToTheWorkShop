@@ -1,9 +1,17 @@
-p.card { 
-  background-color: rgb(241, 241, 241);
-  border: 55px solid #000;
-  border-radius: 55px !important;
-  border: #000 !important;
+.card { 
+  background-color: rgb(255, 255, 255);
+
   /*background-image: url(/src/assets/background.png);*/
+  animation: pulse; /* referring directly to the animation's @keyframe declaration */
+  animation-duration: 3s; /* don't forget to set a duration! */
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, .1);
+}
+mat-card:hover {
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, .5);
+}
+iframe{
+  animation: fadeIn; /* referring directly to the animation's @keyframe declaration */
+  animation-duration: 4;
 }
 .example-header-image {
   background-image: url('https://tja.ucb.edu.bo/wp-content/uploads/2020/09/cropped-logo-UCB.png');
@@ -26,6 +34,6 @@ h3{
 iframe {
   margin: auto;
   display:block;
-    width: 920px;
-    height: 520px;
+  width: 920px;
+  height: 520px;
 }

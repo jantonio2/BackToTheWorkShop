@@ -33,7 +33,7 @@ import { GalleryPageComponent } from './gallery-page/gallery-page.component';
 import { AboutUsPageComponent } from './about-us-page/about-us-page.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ProjectPageComponent } from './project-page/project-page.component';
-
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,9 +44,10 @@ import { ProjectPageComponent } from './project-page/project-page.component';
     HomePageComponent,
     GalleryPageComponent,
     AboutUsPageComponent,
-    ProjectPageComponent,
+    ProjectPageComponent
   ],
   imports: [
+    Ng2SearchPipeModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
