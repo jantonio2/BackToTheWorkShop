@@ -67,11 +67,15 @@ export class CrudService {
           "descripcion":proyecto.descripcion,
           "desarrolladores":proyecto.desarrolladores,
           "contactos":proyecto.contactos,
+          "semestres":proyecto.semestre,
+          "anio":proyecto.anio,
           "imageRef":this.imagePath,
           "imageProy":this.downloadImageURL,
           "videoRef":this.videoPath,
           "videoProy":this.downloadVideoURL,
+          "tripticoRef":this.tripPath,
           "tripticoProy":this.downloadTripURL,
+          
         };
         if(proyecto.id){
           this.afs.collection("Proyecto").doc(proyecto.id).update(proyObj);
@@ -107,7 +111,7 @@ export class CrudService {
           finalize(() => {
             fileRef.getDownloadURL().subscribe(urlImage => {
               this.downloadImageURL = urlImage;
-              this.addProyecto(proy);
+              //this.addProyecto(proy);
             });
           })
         ).subscribe();
@@ -116,7 +120,7 @@ export class CrudService {
           finalize(() => {
             fileRef2.getDownloadURL().subscribe(urlVideo => {
               this.downloadVideoURL = urlVideo;
-              this.addProyecto(proy);
+              //this.addProyecto(proy);
             });
           })
         ).subscribe();

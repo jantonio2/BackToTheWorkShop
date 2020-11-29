@@ -47,7 +47,7 @@ export class CrudComponent implements OnInit {
     desarrolladores: '',
     contactos: '',
     semestre: '',
-    año: '',
+    anio: '',
     imageProy: '',
     videoProy: '',
     tripticoProy: '',
@@ -97,7 +97,7 @@ export class CrudComponent implements OnInit {
     this.proyectoForm.get('desarrolladores').setValue(proyecto.data().desarrolladores);
     this.proyectoForm.get('contactos').setValue(proyecto.data().contactos);
     this.proyectoForm.get('semestre').setValue(proyecto.data().semestre);
-    this.proyectoForm.get('año').setValue(proyecto.data().año);
+    this.proyectoForm.get('anio').setValue(proyecto.data().anio);
     this.proyectoForm.get('imageRef').setValue(proyecto.data().image);
     this.proyectoForm.get('videoRef').setValue(proyecto.data().video);
     this.proyectoForm.get('tripticoRef').setValue(proyecto.data().triptico);
@@ -131,6 +131,8 @@ export class CrudComponent implements OnInit {
       this.nuevoProyecto.descripcion=await this.proyectoForm.get('descripcion').value;
       this.nuevoProyecto.desarrolladores=await this.proyectoForm.get('desarrolladores').value;
       this.nuevoProyecto.contactos=await this.proyectoForm.get('contactos').value;
+      this.nuevoProyecto.semestre=await this.proyectoForm.get('semestre').value;
+      this.nuevoProyecto.anio=await this.proyectoForm.get('anio').value;
       
         console.log('New post',this.nuevoProyecto);
         this.crud.preAddAndUpdateProy(this.nuevoProyecto, this.image, this.video, this.triptico);
@@ -142,7 +144,7 @@ export class CrudComponent implements OnInit {
         this.proyectoForm.get('desarrolladores').setValue(" ");
         this.proyectoForm.get('contactos').setValue(" ");
         this.proyectoForm.get('semestre').setValue(" ");
-        this.proyectoForm.get('año').setValue(" ");
+        this.proyectoForm.get('anio').setValue(" ");
         this.proyectoForm.get('imageRef').setValue(" ");
         this.proyectoForm.get('videoRef').setValue(" ");
         this.proyectoForm.get('tripticoRef').setValue(" ");
