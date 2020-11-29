@@ -20,3 +20,12 @@
   #footer a {
     color: white;
   }
+  .card{
+    height: 150px;
+  }
+  p{
+    font-size: 30;
+  }
+  h5{
+    font-size: 25;
+  }
