@@ -111,7 +111,7 @@ export class CrudService {
           finalize(() => {
             fileRef.getDownloadURL().subscribe(urlImage => {
               this.downloadImageURL = urlImage;
-              this.addProyecto(proy);
+              //this.addProyecto(proy);
             });
           })
         ).subscribe();
@@ -120,7 +120,7 @@ export class CrudService {
           finalize(() => {
             fileRef2.getDownloadURL().subscribe(urlVideo => {
               this.downloadVideoURL = urlVideo;
-              this.addProyecto(proy);
+              //this.addProyecto(proy);
             });
           })
         ).subscribe();
