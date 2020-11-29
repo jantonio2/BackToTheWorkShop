@@ -1,6 +1,6 @@
 <div class="content">
   <div class="search-hero">
-    <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off">
+    <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Ingresa una palabra clave (Titulo, Año, etc">
   </div>
 <div fxLayout="row wrap" fxLayoutGap="45px grid">
   <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let proyecto of (proyectos | async | filter:searchText); index as id">
